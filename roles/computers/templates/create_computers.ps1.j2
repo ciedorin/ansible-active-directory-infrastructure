@@ -1,0 +1,22 @@
+Import-Module ActiveDirectory
+
+$departments = @(
+{% for dep in departments %}
+"{{ dep }}"{% if not loop.last %},{% endif %}
+{% endfor %}
+)
+
+foreach ($dep in $departments) {
+
+    $short = ($dep.Split(" ")[0]).ToUpper()
+
+    for ($i=1; $i -le 375; $i++) {
+
+        $name = "$short-{0:D3}" -f $i
+
+        New-ADComputer `
+            -Name $name `
+            -Path "OU=Computers,OU=$dep,DC=groupb,DC=lab" `
+            -ErrorAction SilentlyContinue
+    }
+}

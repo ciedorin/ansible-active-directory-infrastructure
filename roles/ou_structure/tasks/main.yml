@@ -1,0 +1,13 @@
+- name: Ensure temp folder exists
+  ansible.windows.win_file:
+    path: C:\temp
+    state: directory
+
+- name: Copy OU creation script
+  win_template:
+    src: create_ou.ps1.j2
+    dest: C:\temp\create_ou.ps1
+
+- name: Run OU script
+  win_shell: powershell.exe -ExecutionPolicy Bypass -File C:\temp\create_ou.ps1
+  ignore_errors: yes

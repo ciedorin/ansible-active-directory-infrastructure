@@ -1,0 +1,23 @@
+Import-Module ActiveDirectory
+
+$departments = @(
+{% for dep in departments %}
+"{{ dep }}"{% if not loop.last %},{% endif %}
+{% endfor %}
+)
+
+foreach ($dep in $departments) {
+
+    $clean = $dep -replace '[^A-Za-z]', ''
+
+    for ($i=1; $i -le 25; $i++) {
+
+        $groupName = "$clean-GRP$i"
+
+        New-ADGroup `
+            -Name $groupName `
+            -GroupScope Global `
+            -Path "OU=Groups,OU=$dep,DC=groupb,DC=lab" `
+            -ErrorAction SilentlyContinue
+    }
+}

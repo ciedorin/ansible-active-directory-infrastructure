@@ -1,0 +1,7 @@
+- name: Copy computer script
+  win_template:
+    src: create_computers.ps1.j2
+    dest: C:\temp\create_computers.ps1
+
+- name: Run computer script
+  win_shell: powershell.exe -ExecutionPolicy Bypass -File C:\temp\create_computers.ps1

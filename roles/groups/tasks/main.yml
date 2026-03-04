@@ -1,0 +1,7 @@
+- name: Copy group script
+  win_template:
+    src: create_groups.ps1.j2
+    dest: C:\temp\create_groups.ps1
+
+- name: Run group script
+  win_shell: powershell.exe -ExecutionPolicy Bypass -File C:\temp\create_groups.ps1

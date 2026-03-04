@@ -1,0 +1,28 @@
+- name: Configure DC
+  hosts: dc
+  roles:
+    - server_base
+    - ad_install
+    - ou_structure
+    - groups
+    - users
+    - computers
+    - gpo
+
+- name: Configure File Server
+  hosts: fs
+  roles:
+    - server_base
+    - file_server
+
+- name: Configure Web Server
+  hosts: web
+  roles:
+    - server_base
+    - iis
+
+- name: Configure Clients
+  hosts: clients
+  roles:
+    - client_base
+    - domain_join

@@ -1,0 +1,4 @@
+- name: Install File Services
+  win_feature:
+    name: FS-FileServer
+    state: present

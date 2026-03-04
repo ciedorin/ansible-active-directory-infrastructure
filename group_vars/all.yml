@@ -1,0 +1,27 @@
+domain_name: groupb.lab
+domain_netbios: GROUPB
+safe_mode_password: "Salam@123"
+domain_admin_user: Administrator
+domain_admin_password: "Salam@123"
+
+departments:
+  - Strategic Operations Division
+  - Innovation & Future Technologies
+  - Customer Success Department
+  - Global Partnerships & Alliances
+  - Digital Transformation Office
+  - Brand & Communications Department
+  - Finance & Risk Management
+  - People & Culture Department
+  - Data Analytics & Insights
+  - Research & Product Development
+  - Cybersecurity & Compliance
+  - Supply Chain & Logistics Division
+  - Sales & Revenue Growth Team
+  - Quality Assurance & Performance
+  - Infrastructure & Cloud Services
+  - Learning & Professional Development
+  - Corporate Sustainability Office
+  - Project Management & Delivery
+  - Business Intelligence Unit
+  - Employee Experience & Engagement

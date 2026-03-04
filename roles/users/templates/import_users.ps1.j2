@@ -1,0 +1,34 @@
+Import-Module ActiveDirectory
+
+$password = ConvertTo-SecureString "Salam@123" -AsPlainText -Force
+
+$departments = @(
+{% for dep in departments %}
+"{{ dep }}"{% if not loop.last %},{% endif %}
+{% endfor %}
+)
+
+$files = Get-ChildItem C:\temp\ad_users_set_*.csv | Sort-Object Name
+
+for ($i = 0; $i -lt $files.Count; $i++) {
+
+    $file = $files[$i]
+    $department = $departments[$i]
+
+    $ouPath = "OU=Users,OU=$department,DC=groupb,DC=lab"
+
+    Import-Csv $file | ForEach-Object {
+
+        New-ADUser `
+            -Name $_.DisplayName `
+            -GivenName $_.GivenName `
+            -Surname $_.Surname `
+            -SamAccountName $_.sAMAccountName `
+            -UserPrincipalName "$($_.sAMAccountName)@groupb.lab" `
+            -EmailAddress $_.Email `
+            -AccountPassword $password `
+            -Enabled $true `
+            -Path $ouPath `
+            -ErrorAction SilentlyContinue
+    }
+}

@@ -1,0 +1,13 @@
+- name: Copy user script
+  win_template:
+    src: import_users.ps1.j2
+    dest: C:\temp\import_users.ps1
+
+- name: Copy CSV files
+  win_copy:
+    src: "{{ item }}"
+    dest: "C:\\temp\\{{ item }}"
+  loop: "{{ lookup('fileglob', 'files/ad_users_set_*.csv', wantlist=True) | map('basename') | list }}"
+
+- name: Run user import
+  win_shell: powershell.exe -ExecutionPolicy Bypass -File C:\temp\import_users.ps1

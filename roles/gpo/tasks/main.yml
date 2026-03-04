@@ -1,0 +1,12 @@
+- name: Create GPOs
+  win_shell: |
+    Import-Module GroupPolicy
+
+    New-GPO -Name "Default Security Policy" -ErrorAction SilentlyContinue
+    New-GPO -Name "HR Restrictions" -ErrorAction SilentlyContinue
+    New-GPO -Name "Finance Restrictions" -ErrorAction SilentlyContinue
+    New-GPO -Name "IT Special Policy" -ErrorAction SilentlyContinue
+    New-GPO -Name "Workstation Policy" -ErrorAction SilentlyContinue
+    New-GPO -Name "Server Policy" -ErrorAction SilentlyContinue
+    New-GPO -Name "Security Baseline" -ErrorAction SilentlyContinue
+    New-GPO -Name "Audit Policy" -ErrorAction SilentlyContinue
