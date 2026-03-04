@@ -1,17 +1,9 @@
-# ansible-active-directory-infrastructure
-
-Automated Microsoft Active Directory infrastructure deployment using **Ansible**, **PowerShell**, and **Infrastructure as Code principles**.
-
----
-
 ## Overview
 
 This project demonstrates automated deployment of a Microsoft infrastructure environment using Ansible.  
 The infrastructure includes Active Directory, DNS, IIS, domain clients, organizational units, users, groups, and policies.
 
 The goal of the project is to provision and configure a complete Windows domain environment with minimal manual work.
-
----
 
 ## Architecture
 
@@ -27,7 +19,19 @@ The infrastructure is deployed in a virtual lab environment.
 
 Network: VMware NAT (VMnet)
 
----
+## Prerequisites
+
+Before running the Ansible playbooks, several PowerShell scripts must be executed on the Windows machines to prepare the environment.
+
+These scripts enable **WinRM**, configure **remote management**, and allow Ansible to connect to the Windows servers.
+
+Example preparation commands:
+
+```bash
+Enable-PSRemoting -Force
+Set-ExecutionPolicy RemoteSigned -Force
+winrm quickconfig -force
+```
 
 ## Automation Features
 
@@ -46,7 +50,6 @@ Automation includes:
 
 Approximately **70% of the infrastructure is automated**.
 
----
 ## Technologies Used
 
 - Ansible
@@ -58,11 +61,10 @@ Approximately **70% of the infrastructure is automated**.
 - VMware Workstation
 - CSV Data Generation
 
----
-
 ## How to Run
 
 Run the full infrastructure automation:
 
 ```bash
 ansible-playbook -i inventory.ini site.yml
+```
